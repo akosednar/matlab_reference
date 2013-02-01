@@ -1,0 +1,268 @@
+%
+% Based on Winston's LateX Cheat Sheet http://stdout.org/~winston/latex/
+%
+
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{MATLAB Reference Sheet}\\ Anthony Kosednar - MAE 215}
+\end{center}
+
+\section{IEEE-754}
+\begin{tabular}{@{}ll@{}}
+sign (s), mantissa (m), base (b), and exponent (e)\\
+\textbf{Formula:} \begin{math}(-1)^{s} * m * (b)^{e}\end{math} \\
+\end{tabular}
+
+\section{MATLAB Tid Bits}
+\begin{tabular}{@{}ll@{}}
+MATLAB stands for Matrix Laboratory\\
+MATLAB was first written in FORTAN\\
+MATLAB was later rewritten in C\\
+1 and l look similar but are different\\
+1 is not a prime number in MATLAB\\
+\end{tabular}
+
+\section{Basic Types}
+\begin{tabular}{@{}ll@{}}
+A scalar is a 1\verb!x!1 array.\\
+A row vector of length n is a 1\verb!x!n array.\\
+A column vector of length m is an m\verb!x!1 array.\\
+A matrix of dimensions m rows and n columns is an m\verb!x!n array.\\
+\end{tabular}
+
+\section{Naming Conventions}
+\begin{tabular}{@{}ll@{}}
+Case sensitive variable names\\
+Must start with a letter (A-Z,a-z).\\
+Up to 31 letters, digits, and underscores\\
+No special characters besides underscores.\\
+Can not be a reserved keyword.\\
+\end{tabular}
+
+\section{Reserved Keywords}
+\begin{tabular}{@{}ll@{}}
+    'break' \\
+    'case' \\
+    'catch' \\
+    'classdef' \\
+    'continue' \\
+    'else' \\
+    'elseif' \\
+    'end' \\
+    'for' \\
+    'function' \\
+    'global' \\
+    'if' \\
+    'otherwise' \\
+    'parfor' \\
+    'persistent' \\
+    'return' \\
+    'spmd' \\
+    'switch' \\
+    'try' \\
+    'while' \\
+\end{tabular}
+
+\section{Special Characters}
+\begin{tabular}{@{}ll@{}}
+\verb![]!    & forms matrices \\
+\verb!()!  & used in statements to group operations \\
+\verb!.! & decimal point \\
+\verb!,!  & separates subscripts or matrix elements\\
+\verb!;! & separates rows in a matrix definition or suppresses output \\
+\verb!:! & indicates all rows or all columns \\
+\verb!=! & assignment operator (not equality) \\
+\verb!%! & indicates a comment \\
+\verb!%%! & cell divider \\
+\verb!+! &addition \\
+\verb!-! & ubtraction \\
+\verb!*! & multiplication \\
+\verb!.*! & array multiplication \\
+\verb!/! & division \\
+\verb!./! & array division \\
+\verb!^! & exponential \\
+\verb!.^! & array exponential \\
+\end{tabular}
+
+\section{Special Variables/Constants}
+\begin{tabular}{@{}ll@{}}
+\verb!ans!    & default variable for last calculation \\
+\verb!eps!  & 1\\
+\verb!flops! & count of ßoating point operations \\
+\verb!Inf!  & infinity\\
+\verb!NaNa! & NaN\\
+\verb!pi! & the math pi (3.1415É) \\
+\verb!i,j! & \begin{math}\sqrt[]{-1}\end{math}\\
+\verb!realmax! & largest real number MATLAB can represent\\
+\verb!realmin! & smallest real number MATLAB can represent\\
+\verb!intmax! & returns largest possible integer used in MATLAB\\
+\verb!intmin! & returns smallest possible integer used in MATLAB\\
+\verb!clock! & returns the time\\
+\verb!date! & returns the date\\
+\end{tabular}
+
+\section{Basic Commands and Functions}
+\begin{tabular}{@{}ll@{}}
+\verb!Clc!    & clears command window \\
+\verb!clear!  & clears workspace\\
+\verb!Diary! & creates a copy of all commands and most results \\
+\verb!exit!  & terminates MATLAB\\
+\verb!help! & invokes help utility\\
+\verb!helpwin! & invokes windowed help utility\\
+\verb!length! & length of a vector or maximum dimension of an array\\
+\verb!size! & display dimensions of a particular array\\
+\verb!quite! & terminates MATLAB \\
+\verb!save! & saves variables in a file \\
+\verb!who! & lists  variables in memory\\
+\verb!whos! & lists  variable names, sizes, and types in memory\\
+\end{tabular}
+
+\section{Relational and Logical Operators}
+\begin{tabular}{@{}ll@{}}
+\verb!<!    & less than \\
+\verb!<==!    & less than or equal to \\
+\verb!>!    & greater than \\
+\verb!>==!    & greater than or equal to \\
+\verb!==!    &  equal to \\
+\verb!~=!    &  not equal to \\
+\verb!&!    &  and \\
+\verb!!!    &  or \\
+\verb!~!    &  not \\
+\end{tabular}
+
+\section{Conditional Statements}
+\begin{verbatim}
+if expression
+   statements
+elseif expression
+   statements
+else
+   statements
+end
+
+switch switch_expression
+   case case_expression
+      statements
+   case case_expression
+      statements
+   otherwise
+      statements
+end
+\end{verbatim}
+
+\section{Loops}
+\begin{verbatim}
+for k = vectorOrColumnList
+   statements
+end
+
+while logicalExpression
+   statements
+end
+\end{verbatim}
+
+\section{User Defined Functions}
+\begin{tabular}{@{}ll@{}}
+\verb!normal - function [out1,out2] = func_name(inp1,inp2)..end!    & \\
+\verb!anonymous - var_name = @(inp1,inpt2) (inp1*inp2)!    & \\
+\end{tabular}
+
+
+\section{Vector/Matrix Stuff}
+\begin{tabular}{@{}ll@{}}
+\verb!linspace(a,b,N)!    & spaced intervals btwn a \verb!&! b comprised of N pts\\
+\verb!zeros(m,n)!    & an m by n array of zeroes\\
+\verb!zeros(n)!    & an n by n array of zeroes\\
+\verb!ones(m,n)!    & an m by n array of ones\\
+\verb!ones(n)!    & an n by n array of ones\\
+\verb!eye(m,n)!    &  an m by n array with ones on the diagonal\\
+\verb!eye(n)!    &  an n by n identity matrix\\
+\verb!ones(n)!    &  an n by n array of ones\\
+\verb!rand(m,n)!    &  an m by n array of random numbers\\
+\verb!rand(n)!    &  an n by n array of random numbers\\
+\verb!i:k:l!    &  list generation: 1stV alue : Stride : LastV alue\\
+\verb!v(1)!    &  1st element of vector v\\
+\verb!v(end)!    &  last element of vector v\\
+\verb!v(1:2:9)!    &  1st, 3rd, 5th, 7th, 9th elements of vector v\\
+\verb!v(2:3:9)!    &  2nd, 5th, 8th elements of vector v\\
+\verb!A(2,3)!    &  2Õnd row, 3Õrd column of matrix A\\
+\verb!A(:,3)!    &  all elements in column 3\\
+\verb!A(1,:)!    &  all elements in row 1\\
+\verb!A(1:2:end,:)!    &  all odd rows of matrix A\\
+\verb!A(1:2,2:4)!    &  sub-matrix of rows 1 and 2, columns 2 through 4\\
+\verb!A(1,end)!    &  last element in 1Õst row\\
+\end{tabular}
+
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize
+
+Copyright \copyright\ 2013 Anthony Kosednar, Ver: 1.0 \newline
+Based on the works of Winston Chang and Giordano Fusco\newline
+
+\end{multicols}
+\end{document}
