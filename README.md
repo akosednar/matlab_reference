@@ -1,4 +1,4 @@
-matlab_reference
+Matlab Reference
 ================
 
-Matlab Reference Sheet
+A simple Matlab Reference sheet written in LaTeX
